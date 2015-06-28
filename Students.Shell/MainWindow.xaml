@@ -5,7 +5,13 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid>
 
-        <local:StudentView/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <local:StudentListView/>
+        <local:EnrolmentListView Grid.Row="1"/>
 
     </Grid>
 </Window>

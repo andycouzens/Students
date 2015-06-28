@@ -17,11 +17,11 @@ using System.Xml;
 namespace Students.Shell
 {
     /// <summary>
-    /// Interaction logic for StudentView.xaml
+    /// Interaction logic for EnrolmentListView.xaml
     /// </summary>
-    public partial class StudentView : UserControl
+    public partial class EnrolmentListView : UserControl
     {
-        public StudentView()
+        public EnrolmentListView()
         {
             InitializeComponent();
         }

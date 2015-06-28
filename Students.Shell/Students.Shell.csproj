@@ -62,12 +62,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Behaviours\MvvmBehaviours.cs" />
     <Compile Include="DelegateCommand.cs" />
+    <Compile Include="Repos\IEnrolmenRepo.cs" />
     <Compile Include="Repos\IStudentRepo.cs" />
+    <Compile Include="Repos\EnrolmentRepo.cs" />
     <Compile Include="Repos\StudentRepo.cs" />
-    <Compile Include="ViewModels\StudentViewModel.cs" />
-    <Compile Include="Views\StudentView.xaml.cs">
-      <DependentUpon>StudentView.xaml</DependentUpon>
+    <Compile Include="ViewModels\EnrolmentListViewModel.cs" />
+    <Compile Include="ViewModels\StudentListViewModel.cs" />
+    <Compile Include="Views\EnrolmentListView.xaml.cs">
+      <DependentUpon>EnrolmentListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StudentListView.xaml.cs">
+      <DependentUpon>StudentListView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -81,7 +88,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\StudentView.xaml">
+    <Page Include="Views\EnrolmentListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\StudentListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -14,5 +14,6 @@ namespace Students.Data
 
         public string CourseName { get; set; }
         public bool Active { get; set; }
+        public virtual Student Student { get; set; }
     }
 }

@@ -19,6 +19,6 @@ namespace Students.Data
         public string FirstName { get; set; }
         public string Surname { get; set; }
 
-        public List<Enrolment> Enrolments { get; set; }
+        public virtual List<Enrolment> Enrolments { get; set; }
     }
 }

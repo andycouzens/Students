@@ -10,20 +10,24 @@ using System.Windows.Input;
 
 namespace Students.Shell
 {
-    public class StudentViewModel
+    public class StudentListViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<Student> _students;
         private StudentRepo _repo;
         private Student _selectedStudent;
 
-        public StudentViewModel()
+        public StudentListViewModel()
+        {
+            DeleteCommand = new DelegateCommand(OnDelete, CanDelete);
+        }
+
+        public async void LoadStudents()
         {
             if (DesignerProperties.GetIsInDesignMode(
                 new System.Windows.DependencyObject())) return;
 
             _repo = new StudentRepo();
-            Students = new ObservableCollection<Student>(_repo.GetStudentsAsync().Result);
-            DeleteCommand = new DelegateCommand(OnDelete, CanDelete);
+            Students = new ObservableCollection<Student>(await _repo.GetStudentsAsync());
         }
 
         public DelegateCommand DeleteCommand
@@ -40,7 +44,11 @@ namespace Students.Shell
             }
             set
             {
-                _students = value;
+                if (_students != value)
+                {
+                    _students = value;
+                    OnPropertyChanged("Students");
+                }
             }
         }
 
@@ -52,8 +60,12 @@ namespace Students.Shell
             }
             set
             {
-                _selectedStudent = value;
-                DeleteCommand.RaiseCanExecuteChanged();
+                if (_selectedStudent != value)
+                {
+                    _selectedStudent = value;
+                    DeleteCommand.RaiseCanExecuteChanged();
+                    OnPropertyChanged("SelectedStudent");
+                }
             }
         }
 
@@ -65,6 +77,14 @@ namespace Students.Shell
         private bool CanDelete()
         {
             return SelectedStudent != null;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
