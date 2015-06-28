@@ -62,6 +62,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DelegateCommand.cs" />
     <Compile Include="Repos\IStudentRepo.cs" />
     <Compile Include="Repos\StudentRepo.cs" />
     <Compile Include="ViewModels\StudentViewModel.cs" />

@@ -19,21 +19,27 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
-        <DataGrid ItemsSource="{Binding Students}" AutoGenerateColumns="False" RowDetailsVisibilityMode="VisibleWhenSelected">
+        <DataGrid ItemsSource="{Binding Students}" AutoGenerateColumns="False" 
+                  SelectedItem="{Binding SelectedStudent}" 
+                  RowDetailsVisibilityMode="VisibleWhenSelected">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="FirstName">
+                <!--<DataGridTemplateColumn Header="FirstName">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding Path=FirstName}"/>
+                            <TextBox Text="{Binding Path=FirstName, Mode=TwoWay}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                </DataGridTemplateColumn>-->
+                <DataGridTextColumn Header ="FirstName"  Binding="{Binding FirstName}"/>
             </DataGrid.Columns>
         </DataGrid>
         
         <ListView Grid.Row="1" ItemsSource="{Binding Students}"/>
         
+        <Button Grid.Row="2" Content="Delete" Command="{Binding DeleteCommand}"/>
+
     </Grid>
 </UserControl>
