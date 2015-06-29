@@ -17,11 +17,15 @@ namespace Students.Shell
         private Student _selectedStudent;
 
         public event Action<int> ViewEnrolmentsRequested;
+        public event Action<Student> AddStudentRequested;
+        public event Action<Student> EditStudentRequested;
 
         public StudentListViewModel()
         {
             DeleteCommand = new DelegateCommand(OnDelete, CanDelete);
             ViewEnrolmentsCommand = new DelegateCommand<Student>(OnViewEnrolments);
+            EditStudentCommand = new DelegateCommand<Student>(OnEditStudent);
+            //ClearSearchCommand = new RelayCommand(OnClearSearch);
         }
 
         private void OnViewEnrolments(Student student)
@@ -45,6 +49,12 @@ namespace Students.Shell
             private set;
         }
 
+        public DelegateCommand<Student> EditStudentCommand
+        {
+            get;
+            private set;
+        }
+        
         public DelegateCommand<Student> ViewEnrolmentsCommand
         {
             get;
@@ -84,6 +94,18 @@ namespace Students.Shell
         private bool CanDelete()
         {
             return SelectedStudent != null;
+        }
+
+        private void OnAddStudent()
+        {
+            if (AddStudentRequested != null)
+                AddStudentRequested(new Student());
+
+        }
+        private void OnEditStudent(Student stud)
+        {
+            if (EditStudentRequested != null)
+                EditStudentRequested(stud);
         }
     }
 }

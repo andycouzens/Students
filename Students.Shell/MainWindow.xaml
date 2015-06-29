@@ -14,17 +14,11 @@
         <DataTemplate DataType="{x:Type local:EnrolmentListViewModel}">
             <local:EnrolmentListView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type local:AddEditStudentViewModel}">
+            <local:AddEditStudentView/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
-
-        <!--<Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        
-        <local:StudentListView/>
-        <local:EnrolmentListView Grid.Row="1"/>-->
-        
         <ContentControl Content="{Binding CurrentViewModel}"/>
     </Grid>
 </Window>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Students.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -11,15 +12,23 @@ namespace Students.Shell
     {
         private StudentListViewModel _studentListViewModel = new StudentListViewModel();
         private EnrolmentListViewModel _enrolmentListViewModel = new EnrolmentListViewModel();
+        private AddEditStudentViewModel _addEditStudentViewModel = new AddEditStudentViewModel(); 
 
         private BindableBase _currentViewModel;
 
         public MainWindowViewModel()
         {
             _studentListViewModel.ViewEnrolmentsRequested += NavToEnrolments;
+            _studentListViewModel.EditStudentRequested += NavToEdit;
             _currentViewModel = _studentListViewModel;
 
             NavCommand = new DelegateCommand<string>(OnNav);
+        }
+
+        private void NavToEdit(Student obj)
+        {
+            _addEditStudentViewModel.SetStudent(obj);
+            CurrentViewModel = _addEditStudentViewModel;
         }
 
         private void NavToEnrolments(int studentId)
