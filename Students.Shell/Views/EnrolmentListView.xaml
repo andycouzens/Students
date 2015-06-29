@@ -6,11 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              xmlns:studentdata="clr-namespace:Students.Data;assembly=Students.Data"
-             xmlns:local="clr-namespace:Students.Shell"
-             local:MvvmBehaviours.LoadedMethodName="LoadEnrolments">
-    <UserControl.DataContext>
-        <local:EnrolmentListViewModel/>
-    </UserControl.DataContext>
+             xmlns:local="clr-namespace:Students.Shell">
     <Grid>
         <DataGrid ItemsSource="{Binding Enrolments}" />
     </Grid>

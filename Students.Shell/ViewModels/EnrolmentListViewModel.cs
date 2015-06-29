@@ -10,22 +10,19 @@ using System.Windows.Input;
 
 namespace Students.Shell
 {
-    public class EnrolmentListViewModel : INotifyPropertyChanged
+    public class EnrolmentListViewModel : BindableBase
     {
         private ObservableCollection<Enrolment> _enrolments;
         private EnrolmentRepo _repo;
+        private int _studentId;
 
-        public EnrolmentListViewModel()
-        {
-        }
-
-        public async void LoadEnrolments()
+        public async void LoadEnrolments(int studentId)
         {
             if (DesignerProperties.GetIsInDesignMode(
                 new System.Windows.DependencyObject())) return;
 
             _repo = new EnrolmentRepo();
-            Enrolments = new ObservableCollection<Enrolment>(await _repo.GetEnrolmentsAsync());
+            Enrolments = new ObservableCollection<Enrolment>(await _repo.GetEnrolmentsAsync(studentId));
         }
 
         public ObservableCollection<Enrolment> Enrolments
@@ -36,20 +33,21 @@ namespace Students.Shell
             }
             set
             {
-                if (_enrolments != value)
-                {
-                    _enrolments = value;
-                    OnPropertyChanged("Enrolments");
-                }
+                SetProperty(ref _enrolments, value);
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void OnPropertyChanged(string propertyName)
+        public int StudentId
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            get
+            {
+                return _studentId;
+            }
+            set
+            {
+                SetProperty(ref _studentId, value);
+                LoadEnrolments(_studentId);
+            }
         }
     }
 }

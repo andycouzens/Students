@@ -55,14 +55,15 @@ namespace Students.Shell
     public class DelegateCommand<T> : ICommand
     {
         Action<T> _TargetExecuteMethod;
-        Func<T, bool> _TargetCanExecuteMethod;
+        //Func<T, bool> _TargetCanExecuteMethod;
+        Predicate<T> _TargetCanExecuteMethod;
 
         public DelegateCommand(Action<T> executeMethod)
         {
             _TargetExecuteMethod = executeMethod;
         }
 
-        public DelegateCommand(Action<T> executeMethod, Func<T, bool> canExecuteMethod)
+        public DelegateCommand(Action<T> executeMethod, Predicate<T> canExecuteMethod)
         {
             _TargetExecuteMethod = executeMethod;
             _TargetCanExecuteMethod = canExecuteMethod;

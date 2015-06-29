@@ -13,9 +13,9 @@ namespace Students.Shell
         //TODO - Replace this with DI / Constructor
         StudentsDbContext _context = new StudentsDbContext();
 
-        public Task<List<Enrolment>> GetEnrolmentsAsync()
+        public Task<List<Enrolment>> GetEnrolmentsAsync(int studentId)
         {
-            return _context.Enrolments.ToListAsync();
+            return _context.Enrolments.Where(x => x.Student.Id == studentId).ToListAsync();
         }
     }
 }

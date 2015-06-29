@@ -8,9 +8,9 @@
              xmlns:studentdata="clr-namespace:Students.Data;assembly=Students.Data"
              xmlns:local="clr-namespace:Students.Shell"
              local:MvvmBehaviours.LoadedMethodName="LoadStudents">
-    <UserControl.DataContext>
+    <!--<UserControl.DataContext>
         <local:StudentListViewModel/>
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
     <UserControl.InputBindings>
         <KeyBinding Key="D" Modifiers="Control" Command="{Binding DeleteCommand}"/>
     </UserControl.InputBindings>
@@ -30,14 +30,16 @@
                   SelectedItem="{Binding SelectedStudent}" 
                   RowDetailsVisibilityMode="VisibleWhenSelected">
             <DataGrid.Columns>
-                <!--<DataGridTemplateColumn Header="FirstName">
+                <DataGridTextColumn Header ="FirstName"  Binding="{Binding FirstName}"/>
+                <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding Path=FirstName, Mode=TwoWay}"/>
+                            <Button Content="Enrolments"
+                                    Command="{Binding DataContext.ViewEnrolmentsCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                    CommandParameter="{Binding}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>-->
-                <DataGridTextColumn Header ="FirstName"  Binding="{Binding FirstName}"/>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         

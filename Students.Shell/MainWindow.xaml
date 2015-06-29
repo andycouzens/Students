@@ -1,17 +1,30 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:Students.Shell" x:Class="Students.Shell.MainWindow"
+        xmlns:local="clr-namespace:Students.Shell" 
+        x:Class="Students.Shell.MainWindow"
         Title="MainWindow" Height="350" Width="525">
+    <Window.DataContext>
+        <local:MainWindowViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type local:StudentListViewModel}">
+            <local:StudentListView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:EnrolmentListViewModel}">
+            <local:EnrolmentListView/>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
 
-        <Grid.RowDefinitions>
+        <!--<Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
         <local:StudentListView/>
-        <local:EnrolmentListView Grid.Row="1"/>
-
+        <local:EnrolmentListView Grid.Row="1"/>-->
+        
+        <ContentControl Content="{Binding CurrentViewModel}"/>
     </Grid>
 </Window>

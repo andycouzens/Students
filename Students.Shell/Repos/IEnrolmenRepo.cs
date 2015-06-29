@@ -9,6 +9,6 @@ namespace Students.Shell
 {
     public interface IEnrolmentRepo
     {
-        Task<List<Enrolment>> GetEnrolmentsAsync();
+        Task<List<Enrolment>> GetEnrolmentsAsync(int studentId);
     }
 }

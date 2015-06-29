@@ -10,15 +10,24 @@ using System.Windows.Input;
 
 namespace Students.Shell
 {
-    public class StudentListViewModel : INotifyPropertyChanged
+    public class StudentListViewModel : BindableBase
     {
         private ObservableCollection<Student> _students;
         private StudentRepo _repo;
         private Student _selectedStudent;
 
+        public event Action<int> ViewEnrolmentsRequested;
+
         public StudentListViewModel()
         {
             DeleteCommand = new DelegateCommand(OnDelete, CanDelete);
+            ViewEnrolmentsCommand = new DelegateCommand<Student>(OnViewEnrolments);
+        }
+
+        private void OnViewEnrolments(Student student)
+        {
+            if (ViewEnrolmentsRequested != null)
+                ViewEnrolmentsRequested(student.Id);
         }
 
         public async void LoadStudents()
@@ -36,6 +45,12 @@ namespace Students.Shell
             private set;
         }
 
+        public DelegateCommand<Student> ViewEnrolmentsCommand
+        {
+            get;
+            private set;
+        }
+
         public ObservableCollection<Student> Students
         {
             get
@@ -44,11 +59,7 @@ namespace Students.Shell
             }
             set
             {
-                if (_students != value)
-                {
-                    _students = value;
-                    OnPropertyChanged("Students");
-                }
+                SetProperty(ref _students, value);
             }
         }
 
@@ -60,12 +71,8 @@ namespace Students.Shell
             }
             set
             {
-                if (_selectedStudent != value)
-                {
-                    _selectedStudent = value;
-                    DeleteCommand.RaiseCanExecuteChanged();
-                    OnPropertyChanged("SelectedStudent");
-                }
+                SetProperty(ref _selectedStudent, value);
+                DeleteCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -77,14 +84,6 @@ namespace Students.Shell
         private bool CanDelete()
         {
             return SelectedStudent != null;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
